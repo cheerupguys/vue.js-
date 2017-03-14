@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css" />
+		<script type="text/javascript" src="js/jquery-1.10.1.js" ></script>
+		<script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js" ></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#addData").click(function(){
+					var userinfoVal=$("#userinfo").val();
+					var todoList = $("#todoList");
+					var str='<tr> <td>'+userinfoVal+'</td><td><button type="button" class="btn btn-danger todoDelete">删除</button></td></tr>';
+					todoList.append(str);
+					
+					getCount();
+				})
+				$("#todoList").on('click','.todoDelete',function(){/*事件委派*/
+					$(this).parent().parent().remove();
+				})
+				
+				
+				$('#userinfo').keypress(function(e){
+				    
+					if (e.keyCode==13) {
+						console.log("a");
+						var userinfoVal=$("#userinfo").val();
+						var todoList=$("#todoList");
+						
+						var str='<tr> <td>'+userinfoVal+'</td><td><button type="button" class="btn btn-danger todoDelete">删除</button></td></tr>';
+						todoList.append(str);
+						getCount();
+					}
+				})
+				
+				function getCount(){
+					var todoList=$("#todoList");
+					console.log(todoList.find('tr').length);
+				}
+				
+			})
+		</script>
+		<style>
+			#demo{
+				width: 980px;
+				margin: 0 auto;
+				margin-top: 100px;
+			}
+		</style>
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			<div class="form-inline">
+				<input type="text" class="form-control" placeholder="信息"value="" id="userinfo" />
+				<button type="button" class="btn btn-default" id="addData">增加+</button>
+			</div>
+			<table class="table table-hover" id="todoList">
+				
+			</table>
+		</div>
+	</body>
+</html>
